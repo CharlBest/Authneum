@@ -1,0 +1,15 @@
+/* Set a background image by replacing the URL below */
+body {
+  background: url('https://source.unsplash.com/DAHXjK2NeDM/1920x1080') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+ }
