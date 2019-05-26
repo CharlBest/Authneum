@@ -43,12 +43,7 @@
             <li class="nav-item">
               <a class="nav-link" href="list_items.html">Listed Items</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="sign_up.html">Sign Up</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="log_in.html">Log in</a>
-            </li>
+
           </ul>
           <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search">
@@ -63,18 +58,24 @@
         <h4 class="card-title mt-3 text-center">Create Account</h4>
         <p class="text-center">Get started with your free account</p>
         
-        <form>
+        <form id="regForm">
         <div class="form-group input-group">
           <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fa fa-user"></i> </span>
            </div>
-              <input name="name" class="form-control" placeholder="Full name" type="text">
+              <input name="fullname" class="form-control" placeholder="Full name" type="text">
           </div> <!-- form-group// -->
           <div class="form-group input-group">
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
            </div>
               <input name="email" class="form-control" placeholder="Email address" type="email">
+          </div> <!-- form-group// -->
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fab fa-ethereum"></i> </span>
+           </div>
+              <input name="address" class="form-control" placeholder="Eth Account" type="text">
           </div> <!-- form-group// -->
           <div class="form-group input-group">
             <div class="input-group-prepend">

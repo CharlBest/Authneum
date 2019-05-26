@@ -2,18 +2,25 @@ const abi = '[ { "constant": true, "inputs": [ { "name": "", "type": "bytes32" }
 App = {
   web3Provider: null,
   contracts: {},
-  users: {
-    'stef.dworschak@gmail.com':[
-      'Password',
-      'Stefan Dworschak',
-      '0x14Bc58c391377117D141122401CDf4aE4A90d9CE',
-      [{
-        'unityid' : 1
-      }]
-    ]
-  },
 
   init: async function() {
+    $('#loginItem').hide();
+    $.ajax({
+      url:'/checksession',
+      method:'POST',
+      success:function(res){
+        if(res.response == false){
+          $('#loginItem').hide();
+          $('#logoutItem').show();
+          //$('#loggedinItem').show();
+        } else {
+          $('#loginItem').show();
+          $('#logoutItem').hide();
+          //$('#loggedinItem').hide();
+        }
+      }
+    })
+
     // Load pets.
     $.getJSON('../pets.json', function(data) {
       var petsRow = $('#petsRow');
@@ -33,21 +40,38 @@ App = {
     });
 
     $('#logIn').submit(function(event){ 
-        const user = $('#logIn input[name="email"]').val();
+        const username = $('#logIn input[name="email"]').val();
         const password = $('#logIn input[name="password"]').val();
-        const check_user = App.users[user];
-        if(check_user[0] == password){
-          var loggedin_user = {
-            username: check_user[1],
-            email:user,
-            address: check_user[2],
-            ids: check_user[3]
+        $.ajax({
+          url: '/login',
+          method:'POST',
+          data: {username, password},
+          success:function(res){
+            console.log(res);
+            if(res.response == 'success'){
+              console.log(res)
+              window.location.href='/';
+            }
           }
-          
-          localStorage.setItem('user',JSON.stringify(loggedin_user));
-          window.location.href='/';
-        }
+        })
         event.preventDefault();
+    })
+
+    $('#regForm').submit(function(event){
+        event.preventDefault();
+        const username = $('#regForm input[name="email"]').val();
+        const address = $('#regForm input[name="address"]').val();
+        const display_name = $('#regForm input[name="fullname"]').val();
+        const password = $('#regForm input[name="password"]').val();
+        $.ajax({
+          url: '/register',
+          method:'POST',
+          data: {username, address,display_name, password},
+          success:function(res){
+            console.log(res)
+          }
+        })
+      
     })
 
     return await App.initWeb3();
